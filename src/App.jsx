@@ -9,24 +9,28 @@ function App() {
     setTask("");
   }
 
+  function deleteTask(indexToDelete) {
+    setTasks(tasks.filter((task, index) => (index != indexToDelete)))
+  }
+
   return (
     <main>
       <h1> Todo App </h1>
       <p>Create a task: {task}</p>
-      <input
-        value={task}
-        onChange={(event) => setTask(event.target.value)}
-        placeholder="Enter a task"
-      />
       <br></br>
-
-      <button onClick={addTask}> Add Task </button>
-
+      <input onChange={(event) => setTask(event.target.value)} />
       <br></br>
+      <button onClick={addTask}>Add task</button>
 
-      {tasks.map((task) => (
-        <h1> {task} </h1>
+      {tasks.map((task, index) => (
+        <div>
+          <h1>
+            {task} {index}
+          </h1>
+          <button onClick={() => deleteTask(index)}> Delete </button>
+        </div>
       ))}
+
     </main>
   );
 }
